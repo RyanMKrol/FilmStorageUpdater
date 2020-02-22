@@ -1,4 +1,4 @@
-# This script is used by travis to deploy our api to an ec2 host.
+# This script is used by travis to deploy our project to an ec2 host.
 
 AES_PASS=$1
 
