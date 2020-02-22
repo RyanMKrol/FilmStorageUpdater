@@ -4,7 +4,7 @@ import s3credentials from './../../credentials/S3Credentials.json'
 const MOVIE_BUCKET_NAME = 'ryankrol-films'
 const MOVIE_FILE_KEY = 'films.txt'
 
-const downloadMoviesList = (callbackFunc) => {
+const downloadMoviesList = () => {
   AWS.config.update(s3credentials)
 
   const params = {
@@ -12,7 +12,12 @@ const downloadMoviesList = (callbackFunc) => {
     Key: MOVIE_FILE_KEY
   }
 
-  new AWS.S3().getObject(params, callbackFunc)
+  return new Promise((resolve, reject) => {
+    new AWS.S3().getObject(params, (error, data) => {
+      if (error) reject(error)
+      resolve(data.Body.toString())
+    })
+  })
 }
 
 export default downloadMoviesList

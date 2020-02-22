@@ -9,7 +9,6 @@ async function sendMail(subject, body) {
     auth: gmailCredentials
   })
 
-  // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"FilmStorageUpdater" <ryankrol.m@gmail.com>',
     to: "ryankrol.m@gmail.com",
