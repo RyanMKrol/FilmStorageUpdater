@@ -28,9 +28,9 @@ schedule.scheduleJob('0 0 0 1 * *', async () => {
 
     await uploadMoviesData(filteredMovieData)
 
-    sendMail('Updated your movie list!', JSON.stringify(movieData))
+    sendMail('Updated your movie list', JSON.stringify(movieData))
   } catch(error) {
     console.log(error)
-    sendMail('Failed to update film storage!', error.toString())
+    sendMail('Failed to update film storage', error.toString())
   }
 })
