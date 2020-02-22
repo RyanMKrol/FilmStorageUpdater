@@ -1,15 +1,15 @@
-# This script will sit on the host you want to deploy the site too.
-# This should live wherever the home directory is
-
 AES_PASS=$1
 
 cd ~
-rm -rf BaseNodeApiProject
-git clone https://github.com/RyanMKrol/BaseNodeApiProject.git
-cd BaseNodeApiProject
+rm -rf FilmStorageUpdater
+git clone https://github.com/RyanMKrol/FilmStorageUpdater.git
+cd FilmStorageUpdater
+openssl aes-256-cbc -d -a -in credentials/GmailCredentials.json.enc -out credentials/GmailCredentials.json -k $AES_PASS
+openssl aes-256-cbc -d -a -in credentials/omdbCredentials.json.enc -out credentials/omdbCredentials.json -k $AES_PASS
+openssl aes-256-cbc -d -a -in credentials/S3Credentials.json.enc -out credentials/S3Credentials.json -k $AES_PASS
 git pull
 npm install
 npm run build
-pm2 delete BaseNodeApiProject
-pm2 start build/bin/www.js --name BaseNodeApiProject
+pm2 delete FilmStorageUpdater
+pm2 start build/app.js --name FilmStorageUpdater
 pm2 save
