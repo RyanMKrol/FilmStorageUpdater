@@ -2,8 +2,6 @@ import nodemailer from "nodemailer"
 import gmailCredentials from './../../credentials/GmailCredentials.json'
 
 async function sendMail(subject, body) {
-  let testAccount = await nodemailer.createTestAccount()
-  // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
