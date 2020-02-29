@@ -5,7 +5,12 @@ import {
   uploadMoviesData,
 } from './api/S3'
 import fetchDataByName from './api/OMDB'
-import sendMail from './api/Email'
+import MailSender from 'noodlesmail'
+import gmailCredentials from './../credentials/GmailCredentials.json'
+
+const mailClient = new MailSender(gmailCredentials)
+mailClient.setFrom('"FilmStorageUpdater" <ryankrol.m@gmail.com>')
+mailClient.setTo('ryankrol.m@gmail.com')
 
 schedule.scheduleJob('0 0 0 1 * *', async () => {
   try {
@@ -28,9 +33,9 @@ schedule.scheduleJob('0 0 0 1 * *', async () => {
 
     await uploadMoviesData(filteredMovieData)
 
-    sendMail('Updated your movie list', JSON.stringify(movieData))
+    mailClient.sendMail('Updated your movie list', JSON.stringify(movieData))
   } catch(error) {
     console.log(error)
-    sendMail('Failed to update film storage', error.toString())
+    mailClient.sendMail('Failed to update film storage', error.toString())
   }
 })
