@@ -9,6 +9,8 @@ import MailSender from 'noodlesmail'
 import gmailCredentials from './../credentials/GmailCredentials.json'
 
 const mailClient = new MailSender(gmailCredentials)
+mailClient.setFrom('"FilmStorageUpdater" <ryankrol.m@gmail.com>')
+mailClient.setTo('ryankrol.m@gmail.com')
 
 schedule.scheduleJob('0 0 0 1 * *', async () => {
   try {
