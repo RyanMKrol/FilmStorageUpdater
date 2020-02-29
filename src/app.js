@@ -23,7 +23,7 @@ schedule.scheduleJob('0 0 0 1 * *', async () => {
     const movieData = await Promise.all(movieDataRequests)
 
     const filteredMovieData = movieData.filter((item) => {
-      return item.Response === 'True'
+      return item && item.Response === 'True'
     })
 
     await uploadMoviesData(filteredMovieData)
