@@ -5,7 +5,7 @@ import {
   uploadMoviesData,
 } from './api/S3'
 import fetchDataByName from './api/OMDB'
-import MailSender from 'noodlesmail'
+import MailSender from 'noodlemail'
 import gmailCredentials from './../credentials/GmailCredentials.json'
 
 const mailClient = new MailSender(gmailCredentials)
